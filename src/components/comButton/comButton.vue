@@ -20,7 +20,7 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <button class="button" :class="['button-'+type, 'button-'+size, round ? 'button-round': '']">{{ title }}</button>
+  <button class="button" :class="['button-'+ props.type, 'button-'+ props.size, props.round ? 'button-round': '']">{{ props.title }}</button>
 </template>
 
 <style scoped lang="scss">
