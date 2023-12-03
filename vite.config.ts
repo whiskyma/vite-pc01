@@ -1,31 +1,9 @@
-// import { defineConfig } from 'vite'
-// import vue from '@vitejs/plugin-vue'
-// // import { ConfigEnv, loadEnv, UserConfigExport } from "vite";
-// import { resolve } from "path";
-
-// const root: string = process.cwd();
-
-// /** 路径查找 */
-// const pathResolve = (dir: string): string => {
-//   return resolve(__dirname, ".", dir);
-// };
-
-// /** 设置别名 */
-// const alias: Record<string, string> = {
-//   "@": pathResolve("src"),
-//   "@build": pathResolve("build"),
-// };
-
-// export default defineConfig({
-//   plugins: [vue()],
-// })
-
-
 import type { UserConfig, ConfigEnv  } from "vite";
 import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
 import { loadEnv } from 'vite';
-// import basicSsl from '@vitejs/plugin-basic-ssl' 如果是https 需要引入
+import {VitePWA} from 'vite-plugin-pwa'
+
 
 function pathResolve(dir: string) {
   return resolve(process.cwd(), '.', dir);
@@ -39,6 +17,7 @@ export default ({command, mode}: ConfigEnv): UserConfig => {
   return {
     base: env.VITE_PUBLIC_PATH,
     root,
+    // 服务配置
     server: {
       host: '0.0.0.0',
       port: 4000,
@@ -53,14 +32,16 @@ export default ({command, mode}: ConfigEnv): UserConfig => {
         }
       }
     },
-    // 别名设置
+    // 别名配置
     resolve: {
-      alias: [
-        {
-          find: /\/@\//,
-          replacement: pathResolve('src') + '/'
-        }
-      ]
+      alias: {
+        "@": pathResolve("src"),
+        "@styl": pathResolve("./src/assets/styl"),
+        "@img": pathResolve("./src/assets/img"),
+        "@views": pathResolve("./src/assets/views"),
+        "@comp": pathResolve("./src/assets/components"),
+        "@utils": pathResolve("./src/assets/utils"),
+      },
     },
     // 打包配置
     build: {
@@ -68,6 +49,30 @@ export default ({command, mode}: ConfigEnv): UserConfig => {
       watch: {},
       manifest: true
     },
-    plugins: [vue()]
+    plugins: [
+      vue(),
+      VitePWA({
+          manifest: {
+            // 安装应用后显示的应用名
+              name: "中国红",
+              description: "这是中国红",
+              // 至少配置一个图标
+              icons: [{
+                // 注意如果应用不是部署在站点根目录则需要相对路径，图片文件放在项目/public/pwa/192x192.png
+                  src: "./pwa/192x192.png",
+                  sizes: "192x192",
+                  type: "image/png"
+              }]
+          },
+          registerType: "autoUpdate",
+          workbox: {
+            // 对所有匹配的静态资源进行缓存
+              globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
+          },
+          devOptions: {
+              enabled: true
+          }
+      })
+    ]
   }
 }
