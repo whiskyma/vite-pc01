@@ -24,7 +24,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   export default defineComponent({
-    name: 'HomeIndex',
+    name: 'HomeIndex'
   });
 </script>
 // 在script标签上设置了setup的情况
@@ -38,7 +38,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   export default defineComponent({
-    name: 'HomeIndex',
+    name: 'HomeIndex'
   });
 </script>
 <!--setup -->
@@ -52,6 +52,7 @@
 ```
 
 ## 文件夹和文件命名规范
+
 - 文件夹小写开头
 - ts js 文件小写开头
 - vue 文件大写开头

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import ComButton  from "@/components/comButton/comButton.vue";
-const handerClick = () => {
-  console.log(1234);
-}
+  import ComButton from '@/components/comButton/comButton.vue';
+  const handerClick = () => {
+    console.log(1234);
+  };
 </script>
 
 <template>
