@@ -1,22 +1,22 @@
 <script setup lang="ts">
   // 泛型类型的赋值默认值
   export interface Props {
-    type?: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger'; //按钮类型
-    size?: 'sm' | 'md' | 'lg'; //按钮大小
-    title?: string; // 按钮文字
-    labels?: string[];
-    round?: boolean; // 按钮形状(圆形)
-    disabled: boolean; //按钮禁用状态
+    type?: "default" | "primary" | "success" | "info" | "warning" | "danger" //按钮类型
+    size?: "sm" | "md" | "lg" //按钮大小
+    title?: string // 按钮文字
+    labels?: string[]
+    round?: boolean // 按钮形状(圆形)
+    disabled: boolean //按钮禁用状态
   }
 
   // 设置props默认值(withDefault)
   const props = withDefaults(defineProps<Props>(), {
-    type: 'default',
-    size: 'md',
-    labels: () => ['登录', '注册'],
+    type: "default",
+    size: "md",
+    labels: () => ["登录", "注册"],
     round: false, //默认是直边，不带50%的圆角
     disabled: false
-  });
+  })
 </script>
 
 <template>
