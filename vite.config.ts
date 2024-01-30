@@ -31,6 +31,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         }
       }
     },
+    assetsInclude: ['svga'],
     // 别名配置
     resolve: {
       alias: {
